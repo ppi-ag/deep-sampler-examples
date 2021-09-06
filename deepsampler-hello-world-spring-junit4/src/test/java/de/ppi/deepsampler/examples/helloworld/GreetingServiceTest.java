@@ -40,9 +40,7 @@ public class GreetingServiceTest {
     @Inject
     private GreetingService greetingService;
 
-    @Inject
-    private PersonDao personDao;
-
+  
     @Test
     public void greetingShouldBeGenerated() {
         // (5) Now we define the stub and the sample-value that will be returned by the stub.
