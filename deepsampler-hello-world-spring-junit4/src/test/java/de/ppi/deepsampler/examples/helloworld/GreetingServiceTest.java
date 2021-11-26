@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 // (1) We start by setting up the Spring-context. Please take a look into the class HelloWorldSpringConfig to understand
 // how DeepSampler is activated in a Spring-environment.
