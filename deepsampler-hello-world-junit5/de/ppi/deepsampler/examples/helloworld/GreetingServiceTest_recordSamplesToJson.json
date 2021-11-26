@@ -1,5 +1,5 @@
 {
-  "id" : "78aeda41-87b7-44d0-b643-887c450552a3",
+  "id" : "106876f9-0a3c-43c6-b322-87a76ad28dec",
   "sampleMethodToSampleMap" : {
     "public de.ppi.deepsampler.examples.helloworld.Person de.ppi.deepsampler.examples.helloworld.PersonDaoImpl.loadPerson(int)" : {
       "callMap" : [ {

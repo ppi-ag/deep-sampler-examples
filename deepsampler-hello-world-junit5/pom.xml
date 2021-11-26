@@ -14,11 +14,10 @@
     <parent>
         <groupId>de.ppi</groupId>
         <artifactId>deepsampler-parent</artifactId>
-        <version>1.1.0</version>
+        <version>2.0.0</version>
         <relativePath>../deepsampler-parent</relativePath>
     </parent>
 
-    <groupId>de.ppi</groupId>
     <artifactId>deepsampler-hello-world-junit5</artifactId>
 
     <dependencies>

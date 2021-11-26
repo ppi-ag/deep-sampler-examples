@@ -8,6 +8,7 @@ package de.ppi.deepsampler.examples.helloworld;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import de.ppi.deepsampler.core.api.Matchers;
+import de.ppi.deepsampler.core.api.PersistentSample;
 import de.ppi.deepsampler.core.api.Sample;
 import de.ppi.deepsampler.core.api.Sampler;
 import de.ppi.deepsampler.junit.*;
@@ -80,7 +81,7 @@ class GreetingServiceTest {
 
         @Override
         public void defineSamplers() {
-            Sample.of(personDaoImplSampler.loadPerson(Matchers.anyInt()));
+            PersistentSample.of(personDaoImplSampler.loadPerson(Matchers.anyInt()));
         }
     }
 
