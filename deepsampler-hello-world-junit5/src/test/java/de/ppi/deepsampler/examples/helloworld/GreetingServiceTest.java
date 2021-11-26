@@ -7,8 +7,6 @@ package de.ppi.deepsampler.examples.helloworld;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import de.ppi.deepsampler.core.api.Matchers;
-import de.ppi.deepsampler.core.api.PersistentSample;
 import de.ppi.deepsampler.core.api.Sample;
 import de.ppi.deepsampler.core.api.Sampler;
 import de.ppi.deepsampler.junit.*;
@@ -60,29 +58,4 @@ class GreetingServiceTest {
         // ... and test again. Now we expect that the original and unstubbed person will be greeted:
         assertEquals("Hello Geordi La Forge!", greetingService.createGreeting(1));
     }
-
-    @Test
-    @SaveSamples
-    @UseSamplerFixture(GreetingServiceCompound.class)
-    void recordSamplesToJson() {
-        greetingService.createGreeting(1);
-    }
-
-    @Test
-    @LoadSamples()
-    @UseSamplerFixture(GreetingServiceCompound.class)
-    void loadSamplesFromJson() {
-        assertEquals("Hello Sarek!", greetingService.createGreeting(1));
-    }
-
-    public static class GreetingServiceCompound implements SamplerFixture {
-        @PrepareSampler
-        private PersonDaoImpl personDaoImplSampler;
-
-        @Override
-        public void defineSamplers() {
-            PersistentSample.of(personDaoImplSampler.loadPerson(Matchers.anyInt()));
-        }
-    }
-
 }

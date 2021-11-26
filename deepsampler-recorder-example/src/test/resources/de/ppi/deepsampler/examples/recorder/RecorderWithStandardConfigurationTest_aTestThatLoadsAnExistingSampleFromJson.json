@@ -1,7 +1,7 @@
 {
-  "id" : "3a1fd52b-d95b-425f-b72f-9a64cd7a91da",
+  "id" : "dc5b959e-0fd1-44e8-b9b5-bc7629084922",
   "sampleMethodToSampleMap" : {
-    "public de.ppi.deepsampler.examples.helloworld.Person de.ppi.deepsampler.examples.helloworld.PersonDaoImpl.loadPerson(int)" : {
+    "loadPerson" : {
       "callMap" : [ {
         "parameter" : {
           "args" : [ 1 ]
@@ -9,7 +9,7 @@
         "returnValue" : {
           "@type" : "de.ppi.deepsampler.persistence.bean.DefaultPersistentBean",
           "values" : {
-            "0$name" : "Geordi La Forge",
+            "0$name" : "Jon Luc Picard",
             "0$id" : 0
           }
         }
