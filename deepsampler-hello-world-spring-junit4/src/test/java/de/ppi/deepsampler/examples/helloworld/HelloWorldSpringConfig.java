@@ -19,6 +19,10 @@ public class HelloWorldSpringConfig {
     // (2) This defines the Aspect that we want to use. It is a subclass of DeepSampler's SpringSamplerAspect
     // which is the central Aspect, that is responsible for the actual stubbing. Take a look into HelloWorldSpringSamplerAspect
     // to see how Pointcuts are used to define which classes of an application can be stubbed by DeepSampler.
+    //
+    // Notice: You must use the exact class that contains your @Pointcut-annotations as return value here, otherwise
+    // Spring refuses to use the @Pointcuts. So you cannot use the abstract parent class SpringSamplerAspect as a
+    // return type here, even though this would be quite common.
     @Bean
     public HelloWorldSpringSamplerAspect helloWorldSpringSamplerAspect() {
         return new HelloWorldSpringSamplerAspect();
