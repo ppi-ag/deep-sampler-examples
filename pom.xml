@@ -22,10 +22,11 @@
     </properties>
 
     <modules>
-        <module>../deepsampler-hello-world-app</module>
-        <module>../deepsampler-hello-world-junit4</module>
-        <module>../deepsampler-hello-world-junit5</module>
-        <module>../deepsampler-hello-world-spring-junit4</module>
+        <module>deepsampler-hello-world-app</module>
+        <module>deepsampler-hello-world-junit4</module>
+        <module>deepsampler-hello-world-junit5</module>
+        <module>deepsampler-hello-world-spring-junit4</module>
+        <module>deepsampler-persistence-example</module>
     </modules>
 
     <dependencyManagement>
