@@ -15,7 +15,6 @@
         <groupId>de.ppi</groupId>
         <artifactId>deepsampler-parent</artifactId>
         <version>2.0.0</version>
-        <relativePath>../deepsampler-parent</relativePath>
     </parent>
 
     <artifactId>deepsampler-hello-world-junit5</artifactId>
