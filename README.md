@@ -17,6 +17,7 @@ runtime, and how persistent samples can be loaded in tests.
    out of the box
    4. Adding custom `PersistenBeanExtension`s to persist data, that cannot be persisted by DeepSampler
       out of the box
+   5. Using custom matchers
 3. __Using the low-level-api without annotations:__ DeepSampler provides a low-level-api in case it is used 
 without JUnit, or special configurations are necessary.
    1. Defining stubs
