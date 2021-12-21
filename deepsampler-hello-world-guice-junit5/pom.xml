@@ -17,7 +17,7 @@
         <version>2.0.0</version>
     </parent>
 
-    <artifactId>deepsampler-hello-world-junit5</artifactId>
+    <artifactId>deepsampler-hello-world-guice-junit5</artifactId>
 
     <dependencies>
         <dependency>
