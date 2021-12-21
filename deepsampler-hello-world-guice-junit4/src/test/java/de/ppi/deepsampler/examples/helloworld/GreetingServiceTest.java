@@ -9,17 +9,23 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import de.ppi.deepsampler.core.api.Sample;
 import de.ppi.deepsampler.core.api.Sampler;
-import de.ppi.deepsampler.junit.*;
-import de.ppi.deepsampler.junit5.DeepSamplerExtension;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import de.ppi.deepsampler.junit.PrepareSampler;
+import de.ppi.deepsampler.junit4.DeepSamplerRule;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-// (1) The DeepSamplerExtension enables annotations from DeepSampler...
-@ExtendWith(DeepSamplerExtension.class)
-class GreetingServiceTest {
+/**
+ * This example demonstrates, how to use the basics of DeepSampler with JUnit4 and Guice.
+ */
+public class GreetingServiceTest {
+
+    // (1) The DeepSamplerRule enables annotations for DeepSampler. We use Rules instead of TestRunners because this way
+    // DeepSampler can be combined with other TestRunners (e.g. SpringJUnit4ClassRunner)...
+    @Rule
+    public DeepSamplerRule deepSamplerRule = new DeepSamplerRule();
 
     // (2) The PersonDao has methods that we want to stub, so we need to prepare a Sampler for that class
     // by using the annotation @PrepareSampler...
@@ -31,8 +37,8 @@ class GreetingServiceTest {
     @Inject
     private GreetingService greetingService;
 
-    @BeforeEach
-    void injectWithGuice() {
+    @Before
+    public void injectWithGuice() {
         // (4) In order to convince Guice to inject members into this test class, we create a Guice-Injector. The Injector
         // uses the DeepSamplerModule to tell Guice that we want to activate the DeepSampler-AOP-Plugin. This plugin
         // will do the actual stubbing.
@@ -40,7 +46,7 @@ class GreetingServiceTest {
     }
 
     @Test
-    void greetingShouldBeGenerated() {
+    public void greetingShouldBeGenerated() {
         // (5) Now we define the stub and the sample-value that will be returned by the stub.
         // From now on, the method PersonDao::loadPerson() will return
         // a Person-Object with the name "Sarek" if loadPerson() is called with a 1 as parameter.

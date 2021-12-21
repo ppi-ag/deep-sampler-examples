@@ -17,7 +17,7 @@
         <version>2.0.0</version>
     </parent>
 
-    <artifactId>deepsampler-hello-world-junit4</artifactId>
+    <artifactId>deepsampler-hello-world-spring-junit5</artifactId>
 
     <dependencies>
         <dependency>
@@ -27,15 +27,20 @@
         </dependency>
         <dependency>
             <groupId>de.ppi</groupId>
-            <artifactId>deepsampler-junit4</artifactId>
+            <artifactId>deepsampler-junit5</artifactId>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>de.ppi</groupId>
-            <artifactId>deepsampler-provider-guice</artifactId>
+            <artifactId>deepsampler-provider-spring</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.13</version>
+        </dependency>
     </dependencies>
-
 
 </project>

@@ -8,30 +8,28 @@ package de.ppi.deepsampler.examples.helloworld;
 import de.ppi.deepsampler.core.api.Sample;
 import de.ppi.deepsampler.core.api.Sampler;
 import de.ppi.deepsampler.junit.PrepareSampler;
-import de.ppi.deepsampler.junit4.DeepSamplerRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import de.ppi.deepsampler.junit5.DeepSamplerExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.inject.Inject;
 
-import static org.junit.Assert.assertEquals;
-
 /**
- * This example demonstrates, how to use the basics of DeepSampler with JUnit4 and Spring.
+ * This example demonstrates, how to use the basics of DeepSampler with JUnit5 and Spring.
  */
-// (1) We start by setting up the Spring-context. Please take a look into the class HelloWorldSpringConfig to understand
-// how DeepSampler is activated in a Spring-environment.
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = HelloWorldSpringConfig.class)
-public class GreetingServiceTest {
+// (1) We start by defining two extensions: First the SpringExtension, and second the DeepSamplerExtension. The order
+// of the extensions is not important.
 
-    // (2) The DeepSamplerRule enables annotations for DeepSampler. We use Rules instead of TestRunners because this way
-    // DeepSampler can be combined with other TestRunners (e.g. SpringJUnit4ClassRunner)...
-    @Rule
-    public DeepSamplerRule deepSamplerRule = new DeepSamplerRule();
+// (2) Now we need to set up the Spring-context. Please take a look into the class HelloWorldSpringConfig to understand
+// how DeepSampler is activated in a Spring-environment.
+@ExtendWith({DeepSamplerExtension.class, SpringExtension.class})
+@ContextConfiguration(classes = HelloWorldSpringConfig.class)
+class GreetingServiceTest {
 
     // (3) The PersonDao has methods that we want to stub, so we need to prepare a Sampler for that class
     // by using the annotation @PrepareSampler...
@@ -39,13 +37,13 @@ public class GreetingServiceTest {
     private PersonDao personDaoSampler;
 
     // (4) The GreetingService is the testee, a compound of objects that use instances of PersonDao's. We inject
-    // a GreetingService with all its dependencies using Spring-Injection....
+    // a GreetingService with all its dependencies using Spring-Injection.
     @Inject
     private GreetingService greetingService;
 
   
     @Test
-    public void greetingShouldBeGenerated() {
+    void greetingShouldBeGenerated() {
         // (5) Now we define the stub and the sample-value that will be returned by the stub.
         // From now on, the method PersonDao::loadPerson() will return
         // a Person-Object with the name "Sarek" if loadPerson() is called with a 1 as parameter.
