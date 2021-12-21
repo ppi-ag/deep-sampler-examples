@@ -25,6 +25,7 @@
         <module>deepsampler-hello-world-app</module>
         <module>deepsampler-hello-world-guice-junit4</module>
         <module>deepsampler-hello-world-guice-junit5</module>
+        <module>deepsampler-hello-world-guice-low-level-api</module>
         <module>deepsampler-hello-world-spring-junit4</module>
         <module>deepsampler-hello-world-spring-junit5</module>
         <module>deepsampler-recorder-example</module>
