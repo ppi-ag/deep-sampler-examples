@@ -5,51 +5,52 @@
 
 package de.ppi.deepsampler.examples.helloworld;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
 import de.ppi.deepsampler.core.api.Sample;
 import de.ppi.deepsampler.core.api.Sampler;
 import de.ppi.deepsampler.junit.PrepareSampler;
 import de.ppi.deepsampler.junit4.DeepSamplerRule;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * This example demonstrates, how to use the basics of DeepSampler with JUnit4 and Spring.
+ * This example demonstrates, how to use the basics of DeepSampler with JUnit4 and Guice.
  */
-// (1) We start by setting up the Spring-context. Please take a look into the class HelloWorldSpringConfig to understand
-// how DeepSampler is activated in a Spring-environment.
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = HelloWorldSpringConfig.class)
 public class GreetingServiceTest {
 
-    // (2) The DeepSamplerRule enables annotations for DeepSampler. We use Rules instead of TestRunners because this way
+    // (1) The DeepSamplerRule enables annotations for DeepSampler. We use Rules instead of TestRunners because this way
     // DeepSampler can be combined with other TestRunners (e.g. SpringJUnit4ClassRunner)...
     @Rule
     public DeepSamplerRule deepSamplerRule = new DeepSamplerRule();
 
-    // (3) The PersonDao has methods that we want to stub, so we need to prepare a Sampler for that class
+    // (2) The PersonDao has methods that we want to stub, so we need to prepare a Sampler for that class
     // by using the annotation @PrepareSampler...
     @PrepareSampler
-    private PersonDao personDaoSampler;
+    private PersonDaoImpl personDaoSampler;
 
-    // (4) The GreetingService is the testee, a compound of objects that use instances of PersonDao's. We inject
-    // a GreetingService with all its dependencies using Spring-Injection....
+    // (3) The GreetingService is the testee, a compound of objects that use instances of PersonDao's. We inject
+    // a GreetingService with all its dependencies using Guice-Injection....
     @Inject
     private GreetingService greetingService;
 
-  
+    @Before
+    public void injectWithGuice() {
+        // (4) In order to convince Guice to inject members into this test class, we create a Guice-Injector. The Injector
+        // uses the DeepSamplerModule to tell Guice that we want to activate the DeepSampler-AOP-Plugin. This plugin
+        // will do the actual stubbing.
+        Guice.createInjector(new HelloWorldGuiceModule()).injectMembers(this);
+    }
+
     @Test
     public void greetingShouldBeGenerated() {
         // (5) Now we define the stub and the sample-value that will be returned by the stub.
         // From now on, the method PersonDao::loadPerson() will return
         // a Person-Object with the name "Sarek" if loadPerson() is called with a 1 as parameter.
-        // This applies to all instances of PersonDao that have been created by Spring, no matter where
+        // This applies to all instances of PersonDao that have been created by Guice, no matter where
         // in our object tree a particular instance is located.
         Sample.of(personDaoSampler.loadPerson(1)).is(new Person("Sarek"));
 
@@ -63,6 +64,4 @@ public class GreetingServiceTest {
         // ... and test again. Now we expect that the original and unstubbed person will be greeted:
         assertEquals("Hello Geordi La Forge!", greetingService.createGreeting(1));
     }
-
-
 }

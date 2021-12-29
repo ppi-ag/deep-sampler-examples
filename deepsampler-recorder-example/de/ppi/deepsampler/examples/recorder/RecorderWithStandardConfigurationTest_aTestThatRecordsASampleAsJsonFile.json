@@ -1,0 +1,19 @@
+{
+  "id" : "d82dcc2e-b9e8-4aec-b660-5ff7d1172d52",
+  "sampleMethodToSampleMap" : {
+    "loadPerson" : {
+      "callMap" : [ {
+        "parameter" : {
+          "args" : [ 1 ]
+        },
+        "returnValue" : {
+          "@type" : "de.ppi.deepsampler.persistence.bean.DefaultPersistentBean",
+          "values" : {
+            "0$name" : "Geordi La Forge",
+            "0$id" : 0
+          }
+        }
+      } ]
+    }
+  }
+}
