@@ -1,6 +1,2 @@
 /.idea/
-/deepsampler-hello-world-app/target/
-/deepsampler-hello-world-junit4/target/
-/deepsampler-hello-world-junit5/target/
-/deepsampler-hello-world-spring-junit4/target/
-/deepsampler-recorder-example/target/
+**/target/
