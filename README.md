@@ -1,6 +1,8 @@
 ![Build & Test](https://github.com/ppi-ag/deep-sampler-examples/workflows/Build%20&%20Test/badge.svg)
 # 🎓 deep-sampler-examples
-Executable examples for [DeepSampler](https://github.com/ppi-ag/deep-sampler)
+A collection of executable examples for [DeepSampler 2.0.0](https://github.com/ppi-ag/deep-sampler)
+
+If you are using the previous version 1.1.0 see [DeepSampler 1.1.0 examples](https://github.com/ppi-ag/deep-sampler-examples/tree/main)
 
 # Content
 1. __Basic setup:__ The following examples demonstrate how to set up the basics for JUnit-tests with deepsampler. 
@@ -12,7 +14,7 @@ They also show, how methods can be stubbed using the `Sample`-API.
 2. __Recording & Loading samples:__ The following examples demonstrate, how test data (samples) can be recorded at
 runtime, and how persistent samples can be loaded in tests. 
    1. [Saving and loading samples with default configuration](deepsampler-recorder-example)
-   2. Tweaking filenames and paths
+   2. [Tweaking filenames and paths](deepsampler-recorder-custom-paths)
    3. Adding custom `JsonSerializer`s and `JsonDeserializer`s to persist data, that cannot be persisted by DeepSampler 
    out of the box
    4. Adding custom `PersistenBeanExtension`s to persist data, that cannot be persisted by DeepSampler
