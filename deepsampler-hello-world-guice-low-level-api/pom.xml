@@ -26,9 +26,9 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>de.ppi</groupId>
-            <artifactId>deepsampler-junit5</artifactId>
-            <scope>test</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.6.0</version>
         </dependency>
         <dependency>
             <groupId>de.ppi</groupId>

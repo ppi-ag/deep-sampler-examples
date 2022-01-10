@@ -9,11 +9,8 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import de.ppi.deepsampler.core.api.Sample;
 import de.ppi.deepsampler.core.api.Sampler;
-import de.ppi.deepsampler.junit.*;
-import de.ppi.deepsampler.junit5.DeepSamplerExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
