@@ -1,3 +1,5 @@
 /.idea/
 **/target/
 **/*.iml
+/deepsampler-recorder-low-level-api/tmp/
+/deepsampler-recorder-example/de/
