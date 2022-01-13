@@ -1,7 +1,7 @@
 /*
  *
- *  * Copyright 2020 PPI AG (Hamburg, Germany)
- *  * This program is made available under the terms of the MIT License.
+ * Copyright 2020 PPI AG (Hamburg, Germany)
+ * This program is made available under the terms of the MIT License.
  *
  */
 
@@ -21,7 +21,7 @@ public class HelloWorldSpringSamplerAspect extends SpringSamplerAspect {
      * can be stubbed by DeepSampler. For now, we include all classes in the package de.ppi.deepsampler.examples.helloworld
      * including all sub packages. There are some classes that will be ignored by DeepSampler, though. This is often
      * necessary, because Spring AOP has some limitations. So final classes, Enums, Aspects and SpringConfigs will be
-     * ignored by default.
+     * ignored by default. You can change the default by overriding {@link SpringSamplerAspect#defaultPointCut()}
      * <p>
      * A short introduction to Pointcut expressions can be found here:
      * <a href="https://www.baeldung.com/spring-aop-pointcut-tutorial">Introduction to Pointcut Expressions in Spring</a>.

@@ -1,7 +1,7 @@
 /*
  *
- *  * Copyright 2020 PPI AG (Hamburg, Germany)
- *  * This program is made available under the terms of the MIT License.
+ * Copyright 2020 PPI AG (Hamburg, Germany)
+ * This program is made available under the terms of the MIT License.
  *
  */
 
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * (1) DeepSampler uses an AOP-Aspect, so we need to activate AOP using the following annotation
+ * (1) DeepSampler uses an AOP-Aspect, so we need to activate AOP using the following annotation:
  */
 @EnableAspectJAutoProxy
 @Configuration

@@ -28,7 +28,6 @@
         <dependency>
             <groupId>de.ppi</groupId>
             <artifactId>deepsampler-junit4</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -39,7 +38,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>5.3.13</version>
         </dependency>
     </dependencies>
 

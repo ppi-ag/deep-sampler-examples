@@ -28,7 +28,6 @@
         <dependency>
             <groupId>de.ppi</groupId>
             <artifactId>deepsampler-junit5</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
