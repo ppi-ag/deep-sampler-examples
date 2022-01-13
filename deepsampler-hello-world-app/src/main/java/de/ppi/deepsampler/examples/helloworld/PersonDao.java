@@ -22,4 +22,6 @@ public interface PersonDao {
      * @return The loaded {@link Person}. This object will be replaced by a Sample if loadPerson() is stubbed by DeepSampler.
      */
     Person loadPerson(int personId);
+
+    void setName(String name);
 }

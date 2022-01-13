@@ -13,9 +13,7 @@ import de.ppi.deepsampler.examples.helloworld.GreetingService;
 import de.ppi.deepsampler.examples.helloworld.PersonDaoImpl;
 import de.ppi.deepsampler.junit.*;
 import de.ppi.deepsampler.junit5.DeepSamplerExtension;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.nio.file.Path;
@@ -31,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * defined by DeepSampler automatically.
  */
 @ExtendWith(DeepSamplerExtension.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RecorderWithStandardConfigurationTest {
 
     public static final Path EXPECTED_RECORDED_FILE = Paths.get("de/ppi/deepsampler/examples/recorder/" +
@@ -94,7 +93,6 @@ class RecorderWithStandardConfigurationTest {
     @Order(1)
     void aTestThatRecordsASampleAsJsonFile() {
         // 👉 GIVEN
-        EXPECTED_RECORDED_FILE.toFile().delete();
         assertThat(EXPECTED_RECORDED_FILE).doesNotExist();
 
         // 🧪 WHEN
@@ -112,6 +110,15 @@ class RecorderWithStandardConfigurationTest {
         // 🔬 THEN
         // The preceding method should have written a json file:
         assertThat(EXPECTED_RECORDED_FILE).exists();
+    }
+
+    /**
+     * 🧽 We delete old sample files, before any tests run, in case some old sample files from previous test runs
+     * still exist.
+     */
+    @BeforeAll
+    static void clearSamplerFiles() {
+        EXPECTED_RECORDED_FILE.toFile().delete();
     }
 
 

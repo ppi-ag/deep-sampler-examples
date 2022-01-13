@@ -23,7 +23,7 @@ runtime, and how persistent samples can be loaded in tests.
 3. __Using the low-level-api without annotations:__ DeepSampler provides a low-level-api in case it is used 
 without JUnit, or special configurations are necessary.
    1. [Defining stubs](deepsampler-hello-world-guice-low-level-api)
-   2. Saving and loading samples to/from disk
+   2. [Saving and loading samples to/from disk](deepsampler-recorder-low-level-api)
 
 # License
 [DeepSampler](https://github.com/ppi-ag/deep-sampler) and deep-sampler-examples are made available under the terms of the __MIT License__ (see [LICENSE.md](./LICENSE.md)).

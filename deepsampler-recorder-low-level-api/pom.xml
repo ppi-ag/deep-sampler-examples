@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ /*
-  ~  * Copyright 2020 PPI AG (Hamburg, Germany)
-  ~  * This program is made available under the terms of the MIT License.
-  ~  */
-  -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>de.ppi</groupId>
         <artifactId>deepsampler-parent</artifactId>
+        <groupId>de.ppi</groupId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>deepsampler-hello-world-guice-low-level-api</artifactId>
+    <artifactId>deepsampler-recorder-low-level-api</artifactId>
 
     <dependencies>
         <dependency>
@@ -25,16 +17,26 @@
             <artifactId>deepsampler-hello-world-app</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>de.ppi</groupId>
             <artifactId>deepsampler-provider-guice</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>de.ppi</groupId>
+            <artifactId>deepsampler-persistence-json</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
-
 </project>
