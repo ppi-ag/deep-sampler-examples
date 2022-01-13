@@ -29,6 +29,7 @@
         <module>deepsampler-hello-world-spring-junit4</module>
         <module>deepsampler-hello-world-spring-junit5</module>
         <module>deepsampler-recorder-example</module>
+        <module>deepsampler-recorder-custom-paths</module>
         <module>deepsampler-recorder-low-level-api</module>
     </modules>
 
@@ -79,6 +80,11 @@
                 <artifactId>assertj-core</artifactId>
                 <version>3.21.0</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>5.3.13</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
