@@ -31,6 +31,7 @@
         <module>deepsampler-recorder-example</module>
         <module>deepsampler-recorder-custom-paths</module>
         <module>deepsampler-recorder-low-level-api</module>
+        <module>deepsampler-recorder-bean-converter-extension</module>
     </modules>
 
     <dependencyManagement>
