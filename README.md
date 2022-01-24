@@ -17,8 +17,8 @@ runtime, and how persistent samples can be loaded in tests.
    2. [Tweaking filenames and paths](deepsampler-recorder-custom-paths)
    3. Adding custom `JsonSerializer`s and `JsonDeserializer`s to persist data, that cannot be persisted by DeepSampler 
    out of the box
-   4. Adding custom `PersistenBeanExtension`s to persist data, that cannot be persisted by DeepSampler
-      out of the box
+   4. [Adding custom `PersistenBeanExtension`s to persist data, that cannot be persisted by DeepSampler
+      out of the box](deepsampler-recorder-bean-converter-extension/src/test/java/de/ppi/deepsampler/examples/recorder/beanconverter)
    5. Using custom matchers
 3. __Using the low-level-api without annotations:__ DeepSampler provides a low-level-api in case it is used 
 without JUnit, or special configurations are necessary.

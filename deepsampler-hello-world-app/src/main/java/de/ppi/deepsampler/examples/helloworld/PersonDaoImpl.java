@@ -8,6 +8,7 @@
 package de.ppi.deepsampler.examples.helloworld;
 
 import javax.inject.Singleton;
+import java.time.LocalDateTime;
 
 /**
  * Simulates a DataAccessObject that would load a {@link Person}. In real life the {@link Person} would be loaded from
@@ -18,6 +19,7 @@ import javax.inject.Singleton;
 public class PersonDaoImpl implements PersonDao {
 
     private String name = "Geordi La Forge";
+    private static final LocalDateTime GEORDIS_BIRTHDAY = LocalDateTime.of(2335, 2, 16, 0, 0);
 
     public void setName(String name) {
         this.name = name;
@@ -31,6 +33,6 @@ public class PersonDaoImpl implements PersonDao {
      * @return The loaded {@link Person}. This object will be replaced by a Sample if loadPerson() is stubbed by DeepSampler.
      */
     public Person loadPerson(int personId) {
-        return new Person(name);
+        return new Person(name, GEORDIS_BIRTHDAY);
     }
 }

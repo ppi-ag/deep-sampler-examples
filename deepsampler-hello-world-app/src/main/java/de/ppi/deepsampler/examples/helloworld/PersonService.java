@@ -9,6 +9,7 @@ package de.ppi.deepsampler.examples.helloworld;
 
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 
 /**
  * An example for a Service that would give access to person related data.
@@ -28,5 +29,13 @@ public class PersonService {
      */
     public String getName(int personId) {
         return personDao.loadPerson(personId).getName();
+    }
+    /**
+     * Loads a person using the personId and retrieves the birthday of the person.
+     * @param personId The id of the person
+     * @return The birthday of the person
+     */
+    public LocalDateTime getBirthday(int personId) {
+        return personDao.loadPerson(personId).getBirthday();
     }
 }
