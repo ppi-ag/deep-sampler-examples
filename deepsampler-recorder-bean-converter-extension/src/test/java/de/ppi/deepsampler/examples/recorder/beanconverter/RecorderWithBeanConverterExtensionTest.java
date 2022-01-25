@@ -54,7 +54,7 @@ class RecorderWithBeanConverterExtensionTest {
     }
 
     /**
-     * This test saves a {@link de.ppi.deepsampler.examples.helloworld.Person} that contains a birthday-attribute with
+     * This test saves a {@link de.ppi.deepsampler.examples.helloworld.Person} that contains a birthday-attribute of
      * the type {@link java.time.LocalDateTime}. By default, time-objects are persisted using the epoch-value. Since this
      * is not a human-readable format, we change the format to a stardate. This is done using {@link StarDateBeanConverterExtension}
      * and the {@link StarDateCompound}.
@@ -95,7 +95,7 @@ class RecorderWithBeanConverterExtensionTest {
         assertThat(EXPECTED_RECORDED_FILE).content().contains("\"0$birthday\" : \"2335047.0000\"");
 
         String actualBirthdayGreeting = greetingService.createBirthdayGreeting(1);
-        // And here we check that LocalDateTime was correctly deserialized and converted to a LocalDateTime:
+        // And here we check, that LocalDateTime was correctly deserialized and converted to a LocalDateTime:
         assertThat(actualBirthdayGreeting).isEqualTo("Geordi La Forge's Birthday: 16.02.2335");
     }
 
