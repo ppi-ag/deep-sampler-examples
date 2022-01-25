@@ -16,7 +16,6 @@ import de.ppi.deepsampler.junit5.DeepSamplerExtension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -55,9 +54,9 @@ class RecorderWithBeanConverterExtensionTest {
 
     /**
      * This test saves a {@link de.ppi.deepsampler.examples.helloworld.Person} that contains a birthday-attribute with
-     * the type {@link java.time.LocalDateTime}. By default, time-objects are persisted using the epoch-value. Since this
-     * is not a human-readable format, we change the format to a stardate. This is done using {@link StarDateBeanConverterExtension}
-     * and the {@link StarDateCompound}.
+     * the type {@link java.time.LocalDateTime}. By default, LocalDateTime is persisted using a single numeric value.
+     * Since this is not a human-readable format, we change the format to a stardate. This is done using
+     * {@link StarDateBeanConverterExtension} and the {@link StarDateCompound}.
      * <p>
      * Notice: the execution order of the tests is fixed, so that the first test can save a sampler, that is read by the
      * second test.
