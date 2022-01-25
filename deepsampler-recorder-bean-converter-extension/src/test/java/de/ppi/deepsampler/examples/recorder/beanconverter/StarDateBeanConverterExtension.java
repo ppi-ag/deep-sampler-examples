@@ -16,15 +16,17 @@ import java.time.format.DateTimeFormatter;
 /**
  * This is an example of a {@link de.ppi.deepsampler.persistence.bean.ext.BeanConverterExtension}.
  * <p>
- * By default, time-related objects are serialized using the epoch-value. For the sake of demonstration, we change this
- * format to a stardate! To achieve this, we need to follow three steps:
+ * By default, {@link LocalDateTime} is serialized using a single numerical value. For the sake of demonstration, we change this
+ * format to a stardate! To achieve this, we need to follow four steps:
  * <ul>
- *     <li>Bind this {@link de.ppi.deepsampler.persistence.bean.ext.BeanConverterExtension} to the type {@link LocalDateTime}</li>
+ *     <li>Bind this extension to a SamplerFixture, or a test using the annotation {@link UseBeanConverterExtension}</li>
+ *     <li>Bind this extension to the type {@link LocalDateTime}</li>
  *     <li>Convert a {@link LocalDateTime} to a String, that contains the stardate. This will be used to serialize the {@link LocalDateTime}</li>
  *     <li>Convert the String back to a {@link LocalDateTime} during deserialization}</li>
  * </ul>
  */
 public class StarDateBeanConverterExtension extends StandardBeanConverterExtension {
+    
     private static final DateTimeFormatter STAR_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyDDD.AAAA");
 
     /**
@@ -49,13 +51,13 @@ public class StarDateBeanConverterExtension extends StandardBeanConverterExtensi
      * persistence API (Jackson by default). However, we recommend, to use a
      * {@link de.ppi.deepsampler.persistence.bean.DefaultPersistentBean} for all non-primitive types (including wrapper).
      * DefaultPersistentBeans are a simple key-value-based abstraction of Beans that can be serialized without writing
-     * concrete type names to the json-file. This has the advantage, that serialized beans can be refactored without
-     * affecting the samples.
+     * concrete type names to the json-file. This simplifies refactorings greatly, since name-changes don't affect 
+     * sample-files anymore.
      * <p>
-     * In this case, we convert a {@link LocalDateTime} to a String. So we don't need a
+     * However, for the sake of demonstration, we now simply convert a {@link LocalDateTime} to a String. So we don't need a
      * {@link de.ppi.deepsampler.persistence.bean.DefaultPersistentBean}.
      *
-     * @param originalBean            The original object that is to be converted for serialisation.
+     * @param originalBean            The original object, that is to be converted for serialisation.
      * @param beanType                If the type of the Object was declared as a generic type, the corresponding
      *                                {@link ParameterizedType} is passed to convert(). This is especially useful,
      *                                because the {@link ParameterizedType} cannot be retrieved from originalBean, it
@@ -77,7 +79,7 @@ public class StarDateBeanConverterExtension extends StandardBeanConverterExtensi
      * Since we saved our {@link LocalDateTime} as a String during convert(), we now need to parse the date from the String
      * and return a {@link LocalDateTime} containing the date.
      *
-     * @param persistentBean          An object as it was deserialized by the underlying persistence API. In most cases, this will
+     * @param persistentBean          An object, as it was deserialized by the underlying persistence API. In most cases, this will
      *                                a {@link de.ppi.deepsampler.persistence.model.PersistentBean} or a primitive type.
      * @param targetClass             The type that is used by the stubbed method. This is the type to which persistentBean needs to be
      *                                converted.
