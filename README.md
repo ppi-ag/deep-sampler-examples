@@ -15,8 +15,8 @@ They also show, how methods can be stubbed using the `Sample`-API.
 runtime, and how persistent samples can be loaded in tests. 
    1. [Saving and loading samples with default configuration](deepsampler-recorder-example/src/test/java/de/ppi/deepsampler/examples/recorder)
    2. [Tweaking filenames and paths](deepsampler-recorder-custom-paths/src/test/java/de/ppi/deepsampler/example/recorder/custom/path)
-   3. Adding custom `JsonSerializer`s and `JsonDeserializer`s to persist data, that cannot be persisted by DeepSampler 
-   out of the box
+   3. [Adding custom `JsonSerializer`s and `JsonDeserializer`s to persist data, that cannot be persisted by DeepSampler 
+   out of the box](deepsampler-recorder-json-serializer/src/test/java/recorder)
    4. [Adding custom `PersistenBeanExtension`s to persist data, that cannot be persisted by DeepSampler
       out of the box](deepsampler-recorder-bean-converter-extension/src/test/java/de/ppi/deepsampler/examples/recorder/beanconverter)
    5. Using custom matchers
