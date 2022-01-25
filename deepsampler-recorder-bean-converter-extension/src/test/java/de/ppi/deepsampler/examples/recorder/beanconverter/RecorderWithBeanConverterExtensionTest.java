@@ -16,7 +16,6 @@ import de.ppi.deepsampler.junit5.DeepSamplerExtension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
