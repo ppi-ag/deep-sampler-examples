@@ -53,7 +53,7 @@ class RecorderWithStandardConfigurationTest {
      * including the class name. The file is loaded from the classpath.
      */
     @Test
-    @LoadSamples
+    @LoadSamples(source = FileSource.CLASSPATH)
     @UseSamplerFixture(StandardConfigurationCompound.class)
     void aTestThatLoadsAnExistingSampleFromJson() {
         // 🧪 WHEN
@@ -130,8 +130,8 @@ class RecorderWithStandardConfigurationTest {
         public void defineSamplers() {
             // Here we define the sampled method. If we run a test using @LoadSamples, the return value of this method
             // will be taken from a JSON-file, the original method is not called anymore.
-            // If we run a test using @SaveSamples, the orignal method will called ant the parameter values, and the
-            // return value will be saved to a Json-file.
+            // If we run a test using @SaveSamples, the original method will be called and parameter values, as well as the
+            // return value, will be intercepted and saved to a Json-file.
             PersistentSample.of(personDaoImplSampler.loadPerson(anyInt())).hasId("loadPerson");
         }
     }

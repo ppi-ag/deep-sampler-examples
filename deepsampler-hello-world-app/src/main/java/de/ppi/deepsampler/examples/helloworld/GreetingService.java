@@ -9,6 +9,7 @@ package de.ppi.deepsampler.examples.helloworld;
 
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 
 /**
  * This is an example for a compound that we want to test. The GreetingService creates greeting messages
@@ -32,5 +33,12 @@ public class GreetingService {
         String name = personService.getName(personId);
 
         return String.format("Hello %s!", name);
+    }
+
+    public String createBirthdayGreeting(int personId) {
+        String name = personService.getName(personId);
+        LocalDateTime birthday = personService.getBirthday(personId);
+
+        return String.format("%s's Birthday: %2$te.%2$tm.%2$tY",name, birthday);
     }
 }
