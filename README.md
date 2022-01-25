@@ -1,4 +1,4 @@
-![Build & Test](https://github.com/ppi-ag/deep-sampler-examples/workflows/Build%20&%20Test/badge.svg)
+[![Build & Test](https://github.com/ppi-ag/deep-sampler-examples/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ppi-ag/deep-sampler-examples/actions/workflows/maven.yml)
 # deep-sampler-examples
 Examples for [DeepSampler](https://github.com/ppi-ag/deep-sampler) 1.1.0
 
