@@ -35,4 +35,15 @@ public class PersonDaoImpl implements PersonDao {
     public Person loadPerson(int personId) {
         return new Person(name, GEORDIS_BIRTHDAY);
     }
+
+    /**
+     * Simulates loading {@link Person}s from a DataBase. This method will be stubbed by DeepSampler. The concrete stubbing is
+     * done by the test case.
+     *
+     * @param personId The id of the {@link Person} that will be loaded.
+     * @return The loaded {@link Person}. This object will be replaced by a Sample if loadPerson() is stubbed by DeepSampler.
+     */
+    public Person loadPerson(PersonId personId) {
+        return new Person(name, GEORDIS_BIRTHDAY);
+    }
 }
