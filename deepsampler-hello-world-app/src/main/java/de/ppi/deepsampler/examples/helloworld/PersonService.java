@@ -30,6 +30,16 @@ public class PersonService {
     public String getName(int personId) {
         return personDao.loadPerson(personId).getName();
     }
+
+    /**
+     * Loads a person using the personId and retrieves the name of the person.
+     * @param personId The id of the person
+     * @return The name of the person
+     */
+    public String getName(PersonId personId) {
+        return personDao.loadPerson(personId).getName();
+    }
+
     /**
      * Loads a person using the personId and retrieves the birthday of the person.
      * @param personId The id of the person

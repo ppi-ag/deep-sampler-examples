@@ -3,12 +3,11 @@
  * This program is made available under the terms of the MIT License.
  */
 
-package recorder;
+package de.ppi.deepsampler.example.recorder.json.serializer;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import de.ppi.deepsampler.core.api.PersistentSample;
-import de.ppi.deepsampler.core.api.Sampler;
 import de.ppi.deepsampler.examples.helloworld.GreetingService;
 import de.ppi.deepsampler.examples.helloworld.Person;
 import de.ppi.deepsampler.examples.helloworld.PersonDaoImpl;

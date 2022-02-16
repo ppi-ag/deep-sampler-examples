@@ -41,4 +41,18 @@ public class GreetingService {
 
         return String.format("%s's Birthday: %2$te.%2$tm.%2$tY",name, birthday);
     }
+
+    /**
+     * Creates a greeting message for a person identified by a {@link PersonId}, which comes without an equals().
+     * We use this method to demonstrate, how custom matchers can be used to replace a missing equals() method in
+     * parameter values.
+     *
+     * @param personId The id of the person that we want to greet
+     * @return a greeting for personId
+     */
+    public String createGreeting(PersonId personId) {
+        String name = personService.getName(personId);
+
+        return String.format("Hello %s!", name);
+    }
 }

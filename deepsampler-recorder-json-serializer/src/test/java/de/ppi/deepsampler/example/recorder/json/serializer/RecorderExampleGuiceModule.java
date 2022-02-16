@@ -5,7 +5,7 @@
  *
  */
 
-package recorder;
+package de.ppi.deepsampler.example.recorder.json.serializer;
 
 import com.google.inject.AbstractModule;
 import de.ppi.deepsampler.examples.helloworld.PersonDao;

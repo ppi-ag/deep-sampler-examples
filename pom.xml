@@ -33,6 +33,7 @@
         <module>deepsampler-recorder-low-level-api</module>
         <module>deepsampler-recorder-bean-converter-extension</module>
         <module>deepsampler-recorder-json-serializer</module>
+        <module>deepsampler-recorder-matchers</module>
     </modules>
 
     <dependencyManagement>
