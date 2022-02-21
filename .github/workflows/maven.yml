@@ -5,9 +5,9 @@ name: Build & Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   build:
@@ -17,8 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
+    # Even though java 1.8 is out-dated, we need to ensure downwards compatibility. This is why we still have to use the old version with these tests.
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file deepsampler-parent/pom.xml
+      run: mvn -B package --file pom.xml

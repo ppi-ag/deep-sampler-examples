@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 PPI AG (Hamburg, Germany)
+ * Copyright 2022 PPI AG (Hamburg, Germany)
  * This program is made available under the terms of the MIT License.
  */
 
@@ -19,6 +19,9 @@ import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This example demonstrates, how to use the basics of DeepSampler with JUnit4 and Spring.
+ */
 // (1) We start by setting up the Spring-context. Please take a look into the class HelloWorldSpringConfig to understand
 // how DeepSampler is activated in a Spring-environment.
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,7 +39,7 @@ public class GreetingServiceTest {
     private PersonDao personDaoSampler;
 
     // (4) The GreetingService is the testee, a compound of objects that use instances of PersonDao's. We inject
-    // a GreetingService with all its dependencies using Guice-Injection....
+    // a GreetingService with all its dependencies using Spring-Injection....
     @Inject
     private GreetingService greetingService;
 
@@ -46,7 +49,7 @@ public class GreetingServiceTest {
         // (5) Now we define the stub and the sample-value that will be returned by the stub.
         // From now on, the method PersonDao::loadPerson() will return
         // a Person-Object with the name "Sarek" if loadPerson() is called with a 1 as parameter.
-        // This applies to all instances of PersonDao that have been created by Guice, no matter where
+        // This applies to all instances of PersonDao that have been created by Spring, no matter where
         // in our object tree a particular instance is located.
         Sample.of(personDaoSampler.loadPerson(1)).is(new Person("Sarek"));
 

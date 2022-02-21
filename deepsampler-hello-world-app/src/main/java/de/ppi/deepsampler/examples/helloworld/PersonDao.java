@@ -1,8 +1,6 @@
 /*
- *
- *  * Copyright 2020 PPI AG (Hamburg, Germany)
- *  * This program is made available under the terms of the MIT License.
- *
+ * Copyright 2022 PPI AG (Hamburg, Germany)
+ * This program is made available under the terms of the MIT License.
  */
 
 package de.ppi.deepsampler.examples.helloworld;
@@ -22,4 +20,17 @@ public interface PersonDao {
      * @return The loaded {@link Person}. This object will be replaced by a Sample if loadPerson() is stubbed by DeepSampler.
      */
     Person loadPerson(int personId);
+
+    /**
+     * Simulates loading {@link Person}s from a DataBase. This method will be stubbed by DeepSampler. The concrete stubbing is
+     * done by the test case.
+     * {@link PersonId} does not implement equals(). We use this method to demonstrate, how custom matchers can be used
+     * to replace a missing equals() method in parameter values.
+     *
+     * @param personId The id of the {@link Person} that will be loaded.
+     * @return The loaded {@link Person}. This object will be replaced by a Sample if loadPerson() is stubbed by DeepSampler.
+     */
+    Person loadPerson(PersonId personId);
+
+    void setName(String name);
 }

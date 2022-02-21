@@ -1,5 +1,9 @@
 /.idea/
-/deepsampler-hello-world-app/target/
-/deepsampler-hello-world-junit4/target/
-/deepsampler-hello-world-junit5/target/
-/deepsampler-hello-world-spring-junit4/target/
+**/target/
+**/*.iml
+/deepsampler-recorder-low-level-api/tmp/
+/deepsampler-recorder-example/de/
+/deepsampler-recorder-bean-converter-extension/tmp/
+/deepsampler-recorder-custom-paths/src/test/resources/mySamples.json
+/deepsampler-recorder-json-serializer/tmp/
+/deepsampler-recorder-matchers/tmp/samples/

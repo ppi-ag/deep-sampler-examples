@@ -1,14 +1,13 @@
 /*
- *
- *  * Copyright 2020 PPI AG (Hamburg, Germany)
- *  * This program is made available under the terms of the MIT License.
- *
+ * Copyright 2022 PPI AG (Hamburg, Germany)
+ * This program is made available under the terms of the MIT License.
  */
 
 package de.ppi.deepsampler.examples.helloworld;
 
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 
 /**
  * This is an example for a compound that we want to test. The GreetingService creates greeting messages
@@ -29,6 +28,27 @@ public class GreetingService {
      * @return a greeting for personId
      */
     public String createGreeting(int personId) {
+        String name = personService.getName(personId);
+
+        return String.format("Hello %s!", name);
+    }
+
+    public String createBirthdayGreeting(int personId) {
+        String name = personService.getName(personId);
+        LocalDateTime birthday = personService.getBirthday(personId);
+
+        return String.format("%s's Birthday: %2$te.%2$tm.%2$tY",name, birthday);
+    }
+
+    /**
+     * Creates a greeting message for a person identified by a {@link PersonId}, which comes without an equals().
+     * We use this method to demonstrate, how custom matchers can be used to replace a missing equals() method in
+     * parameter values.
+     *
+     * @param personId The id of the person that we want to greet
+     * @return a greeting for personId
+     */
+    public String createGreeting(PersonId personId) {
         String name = personService.getName(personId);
 
         return String.format("Hello %s!", name);

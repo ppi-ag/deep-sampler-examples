@@ -1,0 +1,19 @@
+{
+  "id" : "dc5b959e-0fd1-44e8-b9b5-bc7629084922",
+  "sampleMethodToSampleMap" : {
+    "loadPerson" : {
+      "callMap" : [ {
+        "parameter" : {
+          "args" : [ 1 ]
+        },
+        "returnValue" : {
+          "@type" : "de.ppi.deepsampler.persistence.bean.DefaultPersistentBean",
+          "values" : {
+            "0$name" : "Jon Luc Picard",
+            "0$id" : 0
+          }
+        }
+      } ]
+    }
+  }
+}
