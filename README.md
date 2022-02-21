@@ -25,6 +25,7 @@ without JUnit, or special configurations are necessary.
    1. [Defining stubs](deepsampler-hello-world-guice-low-level-api/src/test/java/de/ppi/deepsampler/examples/helloworld)
    2. [Saving and loading samples to/from disk](deepsampler-recorder-low-level-api/src/test/java/de/ppi/deepsampler/example/recorder)
 
+
 # License
 [DeepSampler](https://github.com/ppi-ag/deep-sampler) and deep-sampler-examples are made available under the terms of the __MIT License__ (see [LICENSE.md](./LICENSE.md)).
 
