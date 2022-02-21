@@ -2,7 +2,7 @@
 # 🎓 deep-sampler-examples
 A collection of executable examples for [DeepSampler 2.0.0](https://github.com/ppi-ag/deep-sampler)
 
-If you are using the previous version 1.1.0 see [DeepSampler 1.1.0 examples](https://github.com/ppi-ag/deep-sampler-examples/tree/main)
+If you are using the previous version 1.1.0 see [DeepSampler 1.1.0 examples](https://github.com/ppi-ag/deep-sampler-examples/tree/%F0%9F%93%9A-maintenance-v1.1.0)
 
 # Content
 1. __Basic setup:__ The following examples demonstrate how to set up the basics for JUnit-tests with deepsampler. 
