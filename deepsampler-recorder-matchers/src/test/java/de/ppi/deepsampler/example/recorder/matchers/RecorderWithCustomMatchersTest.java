@@ -13,10 +13,20 @@ import de.ppi.deepsampler.core.error.InvalidConfigException;
 import de.ppi.deepsampler.examples.helloworld.GreetingService;
 import de.ppi.deepsampler.examples.helloworld.PersonDaoImpl;
 import de.ppi.deepsampler.examples.helloworld.PersonId;
-import de.ppi.deepsampler.junit.*;
+import de.ppi.deepsampler.junit.PrepareSampler;
+import de.ppi.deepsampler.junit.SampleRootPath;
+import de.ppi.deepsampler.junit.SamplerFixture;
+import de.ppi.deepsampler.junit.UseSamplerFixture;
+import de.ppi.deepsampler.junit.json.LoadSamples;
+import de.ppi.deepsampler.junit.json.SaveSamples;
 import de.ppi.deepsampler.junit5.DeepSamplerExtension;
 import de.ppi.deepsampler.persistence.api.PersistentMatchers;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.nio.file.Path;
@@ -90,7 +100,7 @@ class RecorderWithCustomMatchersTest {
         assertThat(EXPECTED_RECORDED_FILE).doesNotExist();
 
         // 🧪 WHEN
-        String actualGreeting = greetingService.createGreeting(new PersonId(1));
+        final String actualGreeting = greetingService.createGreeting(new PersonId(1));
 
         // 🔬 THEN
         assertEquals("Hello Geordi La Forge!", actualGreeting);
@@ -110,7 +120,7 @@ class RecorderWithCustomMatchersTest {
         assertThat(EXPECTED_RECORDED_FILE).exists();
 
         // 🧪 WHEN
-        String actualGreeting = greetingService.createGreeting(new PersonId(1));
+        final String actualGreeting = greetingService.createGreeting(new PersonId(1));
 
         // 🔬 THEN
         assertEquals("Hello Geordi La Forge!", actualGreeting);
@@ -165,7 +175,7 @@ class RecorderWithCustomMatchersTest {
          * @param right The other of the two {@link PersonId}s that are tested for equality.
          * @return true if left and right are equal.
          */
-        public boolean personIdMatches(PersonId left, PersonId right) {
+        public boolean personIdMatches(final PersonId left, final PersonId right) {
             return left.getId() == right.getId();
         }
     }

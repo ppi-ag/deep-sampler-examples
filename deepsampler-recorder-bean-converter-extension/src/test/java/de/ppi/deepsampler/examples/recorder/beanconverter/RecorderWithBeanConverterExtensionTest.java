@@ -11,9 +11,20 @@ import de.ppi.deepsampler.core.api.PersistentSample;
 import de.ppi.deepsampler.examples.helloworld.GreetingService;
 import de.ppi.deepsampler.examples.helloworld.Person;
 import de.ppi.deepsampler.examples.helloworld.PersonDaoImpl;
-import de.ppi.deepsampler.junit.*;
+import de.ppi.deepsampler.junit.PrepareSampler;
+import de.ppi.deepsampler.junit.SampleRootPath;
+import de.ppi.deepsampler.junit.SamplerFixture;
+import de.ppi.deepsampler.junit.UseBeanConverterExtension;
+import de.ppi.deepsampler.junit.UseSamplerFixture;
+import de.ppi.deepsampler.junit.json.LoadSamples;
+import de.ppi.deepsampler.junit.json.SaveSamples;
 import de.ppi.deepsampler.junit5.DeepSamplerExtension;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.nio.file.Path;
@@ -69,7 +80,7 @@ class RecorderWithBeanConverterExtensionTest {
         assertThat(EXPECTED_RECORDED_FILE).doesNotExist();
 
         // 🧪 WHEN
-        String actualGreeting = greetingService.createGreeting(1);
+        final String actualGreeting = greetingService.createGreeting(1);
 
         // 🔬 THEN
         assertEquals("Hello Geordi La Forge!", actualGreeting);
@@ -93,7 +104,7 @@ class RecorderWithBeanConverterExtensionTest {
         // actual JSON-file:
         assertThat(EXPECTED_RECORDED_FILE).content().contains("\"0$birthday\" : \"2335047.0000\"");
 
-        String actualBirthdayGreeting = greetingService.createBirthdayGreeting(1);
+        final String actualBirthdayGreeting = greetingService.createBirthdayGreeting(1);
         // And here we check, that LocalDateTime was correctly deserialized and converted to a LocalDateTime:
         assertThat(actualBirthdayGreeting).isEqualTo("Geordi La Forge's Birthday: 16.02.2335");
     }
