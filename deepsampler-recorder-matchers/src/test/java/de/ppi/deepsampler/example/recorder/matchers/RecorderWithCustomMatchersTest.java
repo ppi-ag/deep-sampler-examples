@@ -13,17 +13,26 @@ import de.ppi.deepsampler.core.error.InvalidConfigException;
 import de.ppi.deepsampler.examples.helloworld.GreetingService;
 import de.ppi.deepsampler.examples.helloworld.PersonDaoImpl;
 import de.ppi.deepsampler.examples.helloworld.PersonId;
-import de.ppi.deepsampler.junit.*;
+import de.ppi.deepsampler.junit.PrepareSampler;
+import de.ppi.deepsampler.junit.SampleRootPath;
+import de.ppi.deepsampler.junit.SamplerFixture;
+import de.ppi.deepsampler.junit.UseSamplerFixture;
+import de.ppi.deepsampler.junit.json.LoadSamples;
+import de.ppi.deepsampler.junit.json.SaveSamples;
 import de.ppi.deepsampler.junit5.DeepSamplerExtension;
 import de.ppi.deepsampler.persistence.api.PersistentMatchers;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static de.ppi.deepsampler.core.api.Matchers.any;
-import static de.ppi.deepsampler.persistence.api.PersistentMatchers.combo;
+import static de.ppi.deepsampler.persistence.api.PersistentMatchers.anyRecorded;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,12 +60,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * However, when it comes to loading <b>persistent samples</b>, things tend to get more complex. This is because we now have
  * two different situations, where matchers can appear: Recording and Replay.
  * <ul>
- *     <li>Recording: The idea of recording is all about the possibility to record test data without any knowledge about
- *     concrete values. Therefore, we usually don't want to limit recording to concrete values. This can be done using
- *     {@link Matchers#any(Class)}</li>
- *     <li>Replay: We want to replay the stubbed values exactly as they have been recorded. This means parameter values
- *     need to be matched precisely to recorded parameter values in order to find the recorded return values. So,
- *     a second matcher is necessary: {@link de.ppi.deepsampler.persistence.api.PersistentMatchers}.</li>
+ *     <li>Recording: Which method-calls will be recorded, is decided by a matcher that is used during recording. This is usually
+ *     a matcher that accepts all possible parameter values, since we usually want to record all method-calls without any filtering.</li>
+ *     <li>Replay: During the execution of tests, that use previously recorded samples, actual calls of stubbed methods
+ *     are matched against the recorded samples. This means: If a stubbed method has been called during a test, DeepSampler tries to
+ *     find a previously recorded sample for the called method. The sample is identified by the method-name and the concrete
+ *     parameters, with which the stubbed method has been called. To do this, a second matcher is needed.</li>
  * </ul>
  * The default replay-matcher is {@link PersistentMatchers#equalsMatcher()}, so if all parameter types override {@link Object#equals(Object)},
  * nothing further has to be done. But if a type comes without equals() (and we cannot simply add one) a custom matcher is necessary.
@@ -79,7 +88,7 @@ class RecorderWithCustomMatchersTest {
     /**
      * We start by recording a sample file. The stubbed method {@link GreetingService#createGreeting(PersonId)} has
      * a parameter of the type {@link PersonId} and this class does not override {@link Object#equals(Object)}. During
-     * recording, we don't need equals(), so until now everything is standard, as you might know it from previous examples.
+     * recording, we don't need equals(), so until now everything is, as you might already have seen it, in previous examples.
      */
     @Test
     @Order(1)
@@ -90,7 +99,7 @@ class RecorderWithCustomMatchersTest {
         assertThat(EXPECTED_RECORDED_FILE).doesNotExist();
 
         // 🧪 WHEN
-        String actualGreeting = greetingService.createGreeting(new PersonId(1));
+        final String actualGreeting = greetingService.createGreeting(new PersonId(1));
 
         // 🔬 THEN
         assertEquals("Hello Geordi La Forge!", actualGreeting);
@@ -110,7 +119,7 @@ class RecorderWithCustomMatchersTest {
         assertThat(EXPECTED_RECORDED_FILE).exists();
 
         // 🧪 WHEN
-        String actualGreeting = greetingService.createGreeting(new PersonId(1));
+        final String actualGreeting = greetingService.createGreeting(new PersonId(1));
 
         // 🔬 THEN
         assertEquals("Hello Geordi La Forge!", actualGreeting);
@@ -131,8 +140,10 @@ class RecorderWithCustomMatchersTest {
         // 🔬 THEN
         assertThatExceptionOfType(InvalidConfigException.class)
                 .isThrownBy(() -> greetingService.createGreeting(new PersonId(1)))
-                .withMessage("The class de.ppi.deepsampler.examples.helloworld.PersonId must implement equals() " +
-                        "if you want to use an de.ppi.deepsampler.core.api.Matchers$EqualsMatcher");
+                .withMessage("The class de.ppi.deepsampler.examples.helloworld.PersonId must implement equals() "
+                             + "if you want to use an de.ppi.deepsampler.core.api.Matchers$EqualsMatcher. "
+                             + "Alternatively, you can define a custom matcher, that does not use equals(). This can be done with "
+                             + "Matchers.matcher(...), or PersistentMatchers.anyRecorded(PersistentMatcher<T>)");
     }
 
 
@@ -149,10 +160,10 @@ class RecorderWithCustomMatchersTest {
         public void defineSamplers() {
             // First we define which method is to be stubbed...
             PersistentSample.of(personDaoImplSampler.loadPerson(
-                            // ... then we define a custom matcher, that replaces the equals() method of PersonId.
-                            // But we need two different matchers; one that is used during recording, and a second, that is used
-                            // during replay. PersistentMatchers#combo() allows us to define these two matchers:
-                            combo(any(PersonId.class), this::personIdMatches)))
+                            // ... then we define a custom matcher, that essentially replaces the equals() method of PersonId during
+                            // test execution. The matcher that is used during recording is unchanged. It is still a
+                            // matcher that accepts all possible parameter values.
+                            anyRecorded(this::personIdMatches)))
                     .hasId("loadFriend");
         }
 
@@ -165,7 +176,7 @@ class RecorderWithCustomMatchersTest {
          * @param right The other of the two {@link PersonId}s that are tested for equality.
          * @return true if left and right are equal.
          */
-        public boolean personIdMatches(PersonId left, PersonId right) {
+        public boolean personIdMatches(final PersonId left, final PersonId right) {
             return left.getId() == right.getId();
         }
     }
@@ -181,7 +192,7 @@ class RecorderWithCustomMatchersTest {
 
         @Override
         public void defineSamplers() {
-            PersistentSample.of(personDaoImplSampler.loadPerson(any(PersonId.class)))
+            PersistentSample.of(personDaoImplSampler.loadPerson(anyRecorded(PersonId.class)))
                     .hasId("loadFriend");
         }
     }

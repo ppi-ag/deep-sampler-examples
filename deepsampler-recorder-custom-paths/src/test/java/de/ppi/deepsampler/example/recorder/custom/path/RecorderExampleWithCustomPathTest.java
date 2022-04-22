@@ -9,9 +9,19 @@ import de.ppi.deepsampler.core.api.PersistentSample;
 import de.ppi.deepsampler.core.model.SampleRepository;
 import de.ppi.deepsampler.examples.helloworld.GreetingService;
 import de.ppi.deepsampler.examples.helloworld.PersonDao;
-import de.ppi.deepsampler.junit.*;
+import de.ppi.deepsampler.junit.FileSource;
+import de.ppi.deepsampler.junit.PrepareSampler;
+import de.ppi.deepsampler.junit.SampleRootPath;
+import de.ppi.deepsampler.junit.SamplerFixture;
+import de.ppi.deepsampler.junit.UseSamplerFixture;
+import de.ppi.deepsampler.junit.json.LoadSamples;
+import de.ppi.deepsampler.junit.json.SaveSamples;
 import de.ppi.deepsampler.junit5.DeepSamplerExtension;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -20,6 +30,7 @@ import javax.inject.Inject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static de.ppi.deepsampler.persistence.api.PersistentMatchers.anyRecordedInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -105,7 +116,7 @@ class RecorderExampleWithCustomPathTest {
 
         @Override
         public void defineSamplers() {
-            PersistentSample.of(personDaoSampler.loadPerson(1)).hasId("loadPerson");
+            PersistentSample.of(personDaoSampler.loadPerson(anyRecordedInt())).hasId("loadPerson");
         }
     }
 
