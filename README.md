@@ -21,7 +21,7 @@ runtime, and how persistent samples can be loaded in tests.
    out of the box](deepsampler-recorder-json-serializer/src/test/java/de/ppi/deepsampler/example/recorder/json/serializer)
    4. [Adding custom `PersistenBeanExtension`s to persist data, that cannot be persisted by DeepSampler
       out of the box](deepsampler-recorder-bean-converter-extension/src/test/java/de/ppi/deepsampler/examples/recorder/beanconverter)
-   5. [Using custom matchers](deepsampler-recorder-matchers/src/test/java/de/ppi/deepsampler/example/recorder/matchers)
+   5. [Using custom matchers for persistent samplers](https://github.com/ppi-ag/deep-sampler-examples/blob/b1618ef9fd28ff8a85e6820f474912393ad0ee58/deepsampler-recorder-matchers/src/test/java/de/ppi/deepsampler/example/recorder/matchers/RecorderWithCustomMatchersTest.java#L155)
 3. __Using the low-level-api without annotations:__ DeepSampler provides a low-level-api in case it is used 
 without JUnit, or special configurations are necessary.
    1. [Defining stubs](deepsampler-hello-world-guice-low-level-api/src/test/java/de/ppi/deepsampler/examples/helloworld)

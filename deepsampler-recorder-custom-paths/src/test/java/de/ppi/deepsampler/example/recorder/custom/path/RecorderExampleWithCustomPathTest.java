@@ -30,6 +30,7 @@ import javax.inject.Inject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static de.ppi.deepsampler.persistence.api.PersistentMatchers.anyRecordedInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -115,7 +116,7 @@ class RecorderExampleWithCustomPathTest {
 
         @Override
         public void defineSamplers() {
-            PersistentSample.of(personDaoSampler.loadPerson(1)).hasId("loadPerson");
+            PersistentSample.of(personDaoSampler.loadPerson(anyRecordedInt())).hasId("loadPerson");
         }
     }
 

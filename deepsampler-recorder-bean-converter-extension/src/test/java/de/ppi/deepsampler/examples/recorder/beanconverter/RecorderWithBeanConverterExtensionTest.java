@@ -30,7 +30,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static de.ppi.deepsampler.core.api.Matchers.anyInt;
+import static de.ppi.deepsampler.persistence.api.PersistentMatchers.anyRecordedInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -137,7 +137,7 @@ class RecorderWithBeanConverterExtensionTest {
             // will be taken from a JSON-file, the original method is not called anymore.
             // If we run a test using @SaveSamples, the original method will still be called and parameter values,
             // as well as the return value will be intercepted and saved to a Json-file.
-            PersistentSample.of(personDaoImplSampler.loadPerson(anyInt())).hasId("loadPerson");
+            PersistentSample.of(personDaoImplSampler.loadPerson(anyRecordedInt())).hasId("loadPerson");
         }
     }
 

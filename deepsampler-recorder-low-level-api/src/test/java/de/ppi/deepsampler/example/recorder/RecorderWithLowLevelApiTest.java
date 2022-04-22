@@ -15,13 +15,17 @@ import de.ppi.deepsampler.examples.helloworld.PersonDaoImpl;
 import de.ppi.deepsampler.persistence.api.PersistentSampler;
 import de.ppi.deepsampler.persistence.api.SourceManager;
 import de.ppi.deepsampler.persistence.json.JsonSourceManager;
-import org.junit.jupiter.api.*;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static de.ppi.deepsampler.core.api.Matchers.anyInt;
+import static de.ppi.deepsampler.persistence.api.PersistentMatchers.anyRecordedInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,7 +42,7 @@ class RecorderWithLowLevelApiTest {
     public static final Path RECORDED_SAMPLER = Paths.get("./tmp/MySampler.json");
 
     // (1) The PersonDao has methods that we want to stub. To achieve this, we create a sampler for this DAO:
-    private PersonDao personDaoSampler = Sampler.prepare(PersonDaoImpl.class);
+    private final PersonDao personDaoSampler = Sampler.prepare(PersonDaoImpl.class);
 
 
     @Inject
@@ -64,7 +68,7 @@ class RecorderWithLowLevelApiTest {
         // this to record all calls to the method, no matter with which parameter values it is called. The actual
         // parameter value will also be recorded to the sample file, so that the sample return value can later be
         // mapped to the parameter value.
-        PersistentSample.of(personDaoSampler.loadPerson(anyInt())).hasId("loadPerson");
+        PersistentSample.of(personDaoSampler.loadPerson(anyRecordedInt())).hasId("loadPerson");
 
         // 🧪 WHEN
         // (4) We now call a method that in turn calls the method that we want to stub. DeepSampler intercepts the
@@ -72,7 +76,7 @@ class RecorderWithLowLevelApiTest {
         // The hardcoded default name of our person is "Geordi La Forge". We change this, so that the subsequent test
         // can demonstrate that the method is actually returning a sample value from the file.
         personDao.setName("Data");
-        String actualGreeting = greetingService.createGreeting(1);
+        final String actualGreeting = greetingService.createGreeting(1);
 
         // 🔬 THEN
         // Just for the sake of demonstration, we check that actualGreeting contains the unstubbed name, as it has been
@@ -95,11 +99,11 @@ class RecorderWithLowLevelApiTest {
 
         // (8) We still should see the unstubbed default value, since we didn't load any samples yet... Remember, we
         // changed the name to "Data" in step 4, so that "Data" was recorded.
-        String unstubbedGreeting = greetingService.createGreeting(1);
+        final String unstubbedGreeting = greetingService.createGreeting(1);
         assertEquals("Hello Geordi La Forge!", unstubbedGreeting);
 
         // (9) We define which method we want to stub...
-        PersistentSample.of(personDaoSampler.loadPerson(anyInt())).hasId("loadPerson");
+        PersistentSample.of(personDaoSampler.loadPerson(anyRecordedInt())).hasId("loadPerson");
 
         // (10) and we load the sample for the stubbed method from a file. Again, we need a SourceManager, that is able to
         // read samples from JSON-Files.
@@ -111,7 +115,7 @@ class RecorderWithLowLevelApiTest {
         // 🧪 WHEN
 
         // (12) We call the stubbed method again. Now we should get the sample value from the file:
-        String stubbedGreeting = greetingService.createGreeting(1);
+        final String stubbedGreeting = greetingService.createGreeting(1);
 
         // 🔬 THEN
         assertEquals("Hello Data!", stubbedGreeting);
