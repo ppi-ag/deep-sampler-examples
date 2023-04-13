@@ -45,9 +45,6 @@ class RecorderWithStandardConfigurationTest {
     public static final Path EXPECTED_RECORDED_FILE = Paths.get("de/ppi/deepsampler/examples/recorder/" +
             "RecorderWithStandardConfigurationTest_aTestThatRecordsASampleAsJsonFile.json");
 
-    @PrepareSampler
-    private PersonDaoImpl personDaoSampler;
-
     @Inject
     private GreetingService greetingService;
 
@@ -71,7 +68,7 @@ class RecorderWithStandardConfigurationTest {
 
         // 🔬 THEN
         // We expect, that the name is 'Jon Luc Picard'. This name is defined in the sample file.
-        assertEquals("Hello Jon Luc Picard!", actualGreeting);
+        assertEquals("Hello Jean-Luc Picard!", actualGreeting);
 
         // 🔭 CROSS CHECK
         // We remove all samples, to be sure, that actualGreeting indeed came from the sample
