@@ -9,7 +9,7 @@
         "returnValue" : {
           "@type" : "de.ppi.deepsampler.persistence.bean.DefaultPersistentBean",
           "values" : {
-            "0$name" : "Jon Luc Picard",
+            "0$name" : "Jean-Luc Picard",
             "0$id" : 0
           }
         }
